@@ -84,37 +84,50 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white p-6">
-      {!visitor ? (
-        <p className="text-xl">Detectando visitante...</p>
-      ) : (
-        <div className="bg-gray-800 p-6 rounded-xl shadow-xl w-full max-w-lg">
-          <h1 className="text-2xl font-bold mb-4 text-center">
-            Visitor Tracker 🔥
-          </h1>
+  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black flex items-center justify-center p-6 text-white">
+    {!visitor ? (
+      <div className="animate-pulse text-xl">Detectando visitante...</div>
+    ) : (
+      <div className="backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-8 w-full max-w-2xl">
 
-          <p><strong>IP:</strong> {visitor.ip}</p>
-          <p><strong>País:</strong> {visitor.country}</p>
+        <h1 className="text-3xl font-bold text-center mb-6">
+          Visitor Tracker 🔥
+        </h1>
 
-          <hr className="my-3 border-gray-600" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-          <p><strong>Ciudad (IP):</strong> {visitor.ip_city}</p>
-          <p><strong>Departamento (IP):</strong> {visitor.ip_region}</p>
+          <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+            <h2 className="text-lg font-semibold mb-3 text-blue-400">
+              🌍 Datos IP
+            </h2>
+            <p><span className="font-semibold">IP:</span> {visitor.ip}</p>
+            <p><span className="font-semibold">País:</span> {visitor.country}</p>
+            <p><span className="font-semibold">Ciudad:</span> {visitor.ip_city}</p>
+            <p><span className="font-semibold">Departamento:</span> {visitor.ip_region}</p>
+          </div>
 
-          <hr className="my-3 border-gray-600" />
+          <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+            <h2 className="text-lg font-semibold mb-3 text-green-400">
+              📍 Datos GPS
+            </h2>
+            <p><span className="font-semibold">Ciudad:</span> {visitor.gps_city || "No disponible"}</p>
+            <p><span className="font-semibold">Departamento:</span> {visitor.gps_region || "No disponible"}</p>
+            <p><span className="font-semibold">Lat:</span> {visitor.latitude || "No permitido"}</p>
+            <p><span className="font-semibold">Lng:</span> {visitor.longitude || "No permitido"}</p>
+            <p><span className="font-semibold">Precisión:</span> {visitor.precision}</p>
+          </div>
 
-          <p><strong>Ciudad (GPS):</strong> {visitor.gps_city || "No disponible"}</p>
-          <p><strong>Departamento (GPS):</strong> {visitor.gps_region || "No disponible"}</p>
-
-          <p><strong>Latitud:</strong> {visitor.latitude || "No permitido"}</p>
-          <p><strong>Longitud:</strong> {visitor.longitude || "No permitido"}</p>
-
-          <p><strong>Precisión:</strong> {visitor.precision}</p>
-          <p><strong>Navegador:</strong> {visitor.browser}</p>
         </div>
-      )}
-    </div>
-  );
-}
+
+        <div className="mt-6 bg-white/5 p-4 rounded-xl border border-white/10 text-center">
+          <p className="text-sm text-gray-300">
+            Navegador: <span className="font-semibold text-white">{visitor.browser}</span>
+          </p>
+        </div>
+
+      </div>
+    )}
+  </div>
+)}
 
 export default App;
